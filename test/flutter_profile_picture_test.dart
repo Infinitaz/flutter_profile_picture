@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_profile_picture/flutter_profile_picture.dart';
 
@@ -22,6 +23,14 @@ void main() {
       radius: 31,
       fontsize: 21,
       random: true,
+    );
+  });
+  test('Background Color', () {
+    ProfilePicture(
+      name: 'Aditya Dharmawan Saputra',
+      radius: 31,
+      fontsize: 21,
+      backgroundColor: Colors.amber,
     );
   });
   test('Max Letter', () {

@@ -1,15 +1,16 @@
 part of flutter_profile_picture;
 
 class Avatar extends StatelessWidget {
-  const Avatar({
-    Key? key,
-    required this.radius,
-    required this.name,
-    required this.fontsize,
-    this.random = false,
-    this.count,
-    this.img,
-  }) : super(key: key);
+  const Avatar(
+      {Key? key,
+      required this.radius,
+      required this.name,
+      required this.fontsize,
+      this.random = false,
+      this.count,
+      this.img,
+      this.backgroundColor})
+      : super(key: key);
 
   final double radius;
   final String name;
@@ -17,6 +18,7 @@ class Avatar extends StatelessWidget {
   final bool random;
   final int? count;
   final String? img;
+  final Color? backgroundColor;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +29,8 @@ class Avatar extends StatelessWidget {
             name: name,
             count: count,
             fontsize: fontsize,
-            random: random)
+            random: random,
+            backgroundColor: backgroundColor)
         : WithImage(radius: radius, img: img!);
   }
 }
@@ -65,6 +68,7 @@ class NoImage extends StatelessWidget {
     required this.count,
     required this.fontsize,
     required this.random,
+    this.backgroundColor,
   }) : super(key: key);
 
   final double radius;
@@ -72,6 +76,7 @@ class NoImage extends StatelessWidget {
   final int? count;
   final double fontsize;
   final bool random;
+  final Color? backgroundColor;
 
   @override
   Widget build(BuildContext context) {
@@ -93,13 +98,15 @@ class NoImage extends StatelessWidget {
       // default color, random, and fixed color
       // default color if name is empty
       // random color to make the background color change every time the page is refreshed
-      backgroundColor: random == true
-          ? randomColor()
-          : name == ''
-              ? ConstantColor.colorDefault
-              : fixedColor(
-                  InitialName.parseName(name, count),
-                ),
+      // use backgroundColor if it's provided, otherwise use default, random, or fixed color
+      backgroundColor: backgroundColor ??
+          (random == true
+              ? randomColor()
+              : name == ''
+                  ? ConstantColor.colorDefault
+                  : fixedColor(
+                      InitialName.parseName(name, count),
+                    )),
       foregroundColor: Colors.white,
     );
   }

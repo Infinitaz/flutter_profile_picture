@@ -24,18 +24,23 @@ class ProfilePicture extends StatelessWidget {
   // img is optional
   // if "not empty", the background color and initial name will change to image.
 
+  final Color? backgroundColor;
+  // backgroundColor is optional
+  // if set, this will override background color
+
   final String? img;
-  const ProfilePicture({
-    Key? key,
-    required this.name,
-    required this.radius,
-    required this.fontsize,
-    this.role,
-    this.tooltip = false,
-    this.random = false,
-    this.count,
-    this.img,
-  }) : super(key: key);
+  const ProfilePicture(
+      {Key? key,
+      required this.name,
+      required this.radius,
+      required this.fontsize,
+      this.role,
+      this.tooltip = false,
+      this.random = false,
+      this.count,
+      this.img,
+      this.backgroundColor})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -55,6 +60,7 @@ class ProfilePicture extends StatelessWidget {
           random: random,
           count: count,
           img: img,
+          backgroundColor: backgroundColor,
         ),
       );
     } else {
@@ -66,6 +72,7 @@ class ProfilePicture extends StatelessWidget {
         random: random,
         count: count,
         img: img,
+        backgroundColor: backgroundColor,
       );
     }
   }
